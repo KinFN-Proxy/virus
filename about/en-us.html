@@ -46,6 +46,78 @@
     
     
   </body>
+  <template>
+  <section class="flex items-center justify-center">
+    <div class="absolute p-6 md:p-8 lg:p-10 top-0">
+      <img src="https://i.ibb.co/crm7HPL/Untitled-2.png" alt="Hurts" class="block h-4 md:h-6 lg:h-8" />
+    </div>
+    
+    <div class="absolute origin-top text-white transform -rotate-90 -translate-x-1/2 translate-y-1/2 left-0 p-6 text-xl md:text-2xl lg:text-3xl">
+      Life
+    </div>
+    
+    <div class="absolute origin-top text-white transform rotate-90 translate-x-1/2 translate-y-1/2 right-0 p-6 text-xl md:text-2xl lg:text-3xl">
+      {{ faith.devotion }}
+    </div>
+    
+    <div class="absolute w-full h-px transform -translate-y-1/2" :style="{ background: '#555555', top: `calc((${faith.devotion} / 100) * 50% + 25%)` }"></div>
+    
+    <div class="absolute bottom-0 p-6 md:p-8 lg:p-10 text-xl md:text-2xl lg:text-3xl text-white">
+      You have {{ faith.devotion }}% life.
+    </div>
+    
+    <div class="relative" style="height:50%">
+      <img src="https://i.ibb.co/grftkXB/hfduqwd-1.png" alt="Faith" class="block" style="height:100%" />
+      
+      <div class="absolute devotion left-0 overflow-hidden top-0" :style="{ height: `${faith.devotion}%` }">
+        <img src="https://i.ibb.co/SxxTgkf/hfduqwd-1-1.png"  />
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      faith: {
+        devotion: 0
+      }
+    }
+  },
+  methods: {
+    startRandomizer() {
+      anime({
+        targets: this.faith,
+        devotion: function() {
+          return anime.random(0, 100)
+        },
+        duration: 1000,
+        delay: 1000,
+        round: 1,
+        easing: 'easeInOutCubic',
+        complete: () => {
+          this.startRandomizer()
+        }
+      })
+    }
+  },
+  mounted() {
+    this.startRandomizer()
+  }
+}
+</script>
+
+<style>
+  html, body, section{
+    height: 100%;
+    width: 100%;
+  }
+  
+  body{
+    background: black;
+  }
+</style>
 </html>
 
 <style>
@@ -275,75 +347,3 @@ nav ul li a {
       
       
       
-      <template>
-  <section class="flex items-center justify-center">
-    <div class="absolute p-6 md:p-8 lg:p-10 top-0">
-      <img src="https://i.ibb.co/crm7HPL/Untitled-2.png" alt="Hurts" class="block h-4 md:h-6 lg:h-8" />
-    </div>
-    
-    <div class="absolute origin-top text-white transform -rotate-90 -translate-x-1/2 translate-y-1/2 left-0 p-6 text-xl md:text-2xl lg:text-3xl">
-      Life
-    </div>
-    
-    <div class="absolute origin-top text-white transform rotate-90 translate-x-1/2 translate-y-1/2 right-0 p-6 text-xl md:text-2xl lg:text-3xl">
-      {{ faith.devotion }}
-    </div>
-    
-    <div class="absolute w-full h-px transform -translate-y-1/2" :style="{ background: '#555555', top: `calc((${faith.devotion} / 100) * 50% + 25%)` }"></div>
-    
-    <div class="absolute bottom-0 p-6 md:p-8 lg:p-10 text-xl md:text-2xl lg:text-3xl text-white">
-      You have {{ faith.devotion }}% life.
-    </div>
-    
-    <div class="relative" style="height:50%">
-      <img src="https://i.ibb.co/grftkXB/hfduqwd-1.png" alt="Faith" class="block" style="height:100%" />
-      
-      <div class="absolute devotion left-0 overflow-hidden top-0" :style="{ height: `${faith.devotion}%` }">
-        <img src="https://i.ibb.co/SxxTgkf/hfduqwd-1-1.png"  />
-      </div>
-    </div>
-  </section>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      faith: {
-        devotion: 0
-      }
-    }
-  },
-  methods: {
-    startRandomizer() {
-      anime({
-        targets: this.faith,
-        devotion: function() {
-          return anime.random(0, 100)
-        },
-        duration: 1000,
-        delay: 1000,
-        round: 1,
-        easing: 'easeInOutCubic',
-        complete: () => {
-          this.startRandomizer()
-        }
-      })
-    }
-  },
-  mounted() {
-    this.startRandomizer()
-  }
-}
-</script>
-
-<style>
-  html, body, section{
-    height: 100%;
-    width: 100%;
-  }
-  
-  body{
-    background: black;
-  }
-</style>
